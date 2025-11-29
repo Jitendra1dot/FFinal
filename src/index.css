@@ -6,10 +6,88 @@
   font-family: 'Inter', Arial, sans-serif;
 }
 
+/* Theme variables (professional palette) */
+:root {
+  --bg: #f3f6f9; /* subtle cool gray */
+  --bg-gradient: linear-gradient(180deg, #f3f6f9 0%, #f8fbff 100%);
+  --surface: #ffffff;
+  --card-bg: #ffffff;
+  --text: #0f1724; /* near-black for high contrast */
+  --muted: rgba(255,255,255,0.85);
+  --primary: #0a2540; /* muted navy */
+  --primary-600: #062033; /* darker navy */
+  --accent: #0b66a6; /* professional blue accent */
+  --success: #0b8457; /* slightly deeper green */
+  --danger: #b3261e; /* professional red */
+  --pill-bg: #f2f6fb; /* soft pill BG for neutral look */
+  --tag-bg: #f1f3f5;
+  --success-bg: rgba(11,132,87,0.08);
+  --danger-bg: rgba(179,38,30,0.08);
+}
+
+/* -- THEME VARIANTS --------------------------------------------------------- */
+/* Professional (default) is defined by the above :root variables */
+.theme-professional {
+  --bg-gradient: linear-gradient(180deg, #f3f6f9 0%, #f8fbff 100%);
+  --primary: #0a2540;
+  --accent: #0b66a6;
+  --surface: #ffffff;
+  --card-bg: #ffffff;
+  --text: #0f1724;
+}
+
+.theme-cool {
+  --bg-gradient: linear-gradient(180deg, #eef6ff 0%, #f6fbff 100%);
+  --primary: #174ea6; /* vivid blue */
+  --accent: #2a9df4; 
+  --surface: #ffffff;
+  --card-bg: #ffffff;
+  --text: #0e1724;
+}
+
+.theme-warm {
+  --bg-gradient: linear-gradient(180deg, #fff7ed 0%, #fffdf8 100%);
+  --primary: #5b2e12; /* warm deep brown */
+  --accent: #ee9e6a;  /* warm accent */
+  --surface: #ffffff;
+  --card-bg: #fffdf8;
+  --text: #111111;
+}
+
+.theme-dark {
+  --bg-gradient: linear-gradient(180deg, #0b1220 0%, #071224 100%);
+  --primary: #1d5f83; /* teal-like */
+  --accent: #29a0ff;
+  --surface: #0e1926;
+  --card-bg: #0f1b2a;
+  --text: #e6eef6;
+  --muted: #9aa7b4;
+}
+
+.theme-bright {
+  /* Neon nebula: dark background with blue -> purple -> pink highlights */
+  --bg-gradient: linear-gradient(90deg, #07102a 0%, #1c1b3a 20%, #481a4d 50%, #a62d8f 75%, #ff2b8a 100%);
+  --primary: #7c3aed; /* rich purple */
+  --accent: #ff2b8a;  /* neon pink */
+  --surface: rgba(10, 12, 22, 0.95); /* dark surface for cards */
+  --card-bg: rgba(12, 16, 32, 0.9);
+  --text: #e6ecff; /* light text on dark background */
+  --muted: #9aa7b4;
+  --tag-bg: linear-gradient(90deg, rgba(48, 99, 255, 0.08), rgba(127, 54, 233, 0.08));
+  --pill-bg: rgba(75, 40, 120, 0.06);
+  --success: #36d399;
+  --danger: #ff6b6b;
+}
+
+
 body {
-  background-color: #f6f8fa;
-  color: #333;
+  background: var(--bg-gradient);
+  color: var(--text);
   line-height: 1.6;
+}
+
+html, body, #root {
+  min-height: 100%;
 }
 
 /* ===== HEADER ===== */
@@ -19,7 +97,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 14px 60px;
-  background-color: #ffffff;
+  background: linear-gradient(90deg, var(--primary), rgba(10, 30, 70, 0.9));
   border-bottom: 1px solid #e5e7eb;
   position: sticky;
   top: 0;
@@ -30,12 +108,12 @@ body {
   font-size: 26px;
   font-weight: bold;
   text-decoration: none;
-  color: #007bff;
+  color: #fff;
 }
 
 /* Sign In button */
 .signin-btn {
-  background-color: #007bff;
+  background-color: var(--accent);
   border: none;
   border-radius: 6px;
   padding: 8px 14px;
@@ -45,7 +123,7 @@ body {
 }
 
 .signin-btn:hover {
-  background-color: #0056b3;
+  background-color: var(--primary-600);
 }
 
 /* ===== MAIN PAGE CONTAINER (CENTERED) ===== */
@@ -78,13 +156,13 @@ body {
 }
 
 .category-btn {
-  background-color: #eaf2ff;
-  border: 1px solid #d4e1ff;
+  background-color: var(--pill-bg);
+  border: 1px solid rgba(10,34,64,0.08);
   padding: 10px 18px;
   border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
-  color: #007bff;
+  color: var(--primary);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -93,13 +171,13 @@ body {
 
 .category-btn:hover,
 .category-btn.active {
-  background-color: #007bff;
+  background-color: var(--primary);
   color: #fff;
 }
 
 /* ===== FILTER BAR ===== */
 .filter-bar {
-  background: #ffffff;
+  background: var(--surface);
   padding: 14px;
   border-radius: 8px;
   display: flex;
@@ -129,7 +207,7 @@ body {
 }
 
 .professional-card {
-  background-color: #ffffff;
+  background-color: var(--card-bg);
   border-radius: 10px;
   padding: 18px;
   position: relative;
@@ -148,7 +226,7 @@ body {
   margin-top: 14px;
   padding: 10px 0;
   border-radius: 6px;
-  background-color: #007bff;
+  background-color: var(--primary);
   border: none;
   font-weight: 600;
   color: #fff;
@@ -157,7 +235,7 @@ body {
 }
 
 .hire-btn:hover {
-  background-color: #0056b3;
+  background-color: var(--primary-600);
 }
 
 /* ===== DETAIL MODAL ===== */
@@ -189,7 +267,7 @@ body {
 }
 
 .signin-form-box {
-  background: #ffffff;
+  background: var(--surface);
   padding: 35px;
   max-width: 420px;
   width: 100%;

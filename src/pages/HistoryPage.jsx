@@ -19,7 +19,7 @@ const HistoryPage = () => {
   if (!currentUser) {
     return (
       <div className="main-content" style={{ textAlign: "center", padding: "60px" }}>
-        <h2 style={{ color: "#c0392b" }}>Access Denied</h2>
+        <h2 style={{ color: "var(--danger)" }}>Access Denied</h2>
         <p>You must be signed in to check Booking History</p>
         <button
           onClick={() => navigate("/signin")}
@@ -45,7 +45,7 @@ const HistoryPage = () => {
         📜 Booking History
       </h1>
 
-      <p style={{ textAlign: "center", color: "#555", marginBottom: "25px" }}>
+      <p style={{ textAlign: "center", color: "var(--muted)", marginBottom: "25px" }}>
         View your service hire history — ({currentUser.email})
       </p>
 
@@ -54,18 +54,18 @@ const HistoryPage = () => {
           style={{
             padding: "50px",
             textAlign: "center",
-            background: "#fff",
+              background: "var(--surface)",
             borderRadius: "12px",
             boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
           }}
         >
-          <p style={{ fontSize: "18px", color: "#777" }}>
+          <p style={{ fontSize: "18px", color: "var(--muted)" }}>
             No bookings yet. Hire services to view them here!
           </p>
-          <button
+            <button
             onClick={() => navigate("/")}
             className="signin-btn"
-            style={{ background: "#007bff", marginTop: "15px" }}
+            style={{ background: "var(--primary)", marginTop: "15px" }}
           >
             Browse Professionals
           </button>
@@ -79,7 +79,7 @@ const HistoryPage = () => {
               <div
                 key={i}
                 style={{
-                  background: "#fff",
+                    background: "var(--surface)",
                   padding: "18px",
                   borderRadius: "10px",
                   boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
@@ -98,15 +98,15 @@ const HistoryPage = () => {
                       margin: 0,
                       fontSize: "18px",
                       fontWeight: "bold",
-                      color: "#333",
+                      color: "var(--text)",
                     }}
                   >
                     {h.proName}
                   </h3>
-                  <p style={{ margin: "3px 0", fontSize: "14px", color: "#007bff" }}>
+                  <p style={{ margin: "3px 0", fontSize: "14px", color: "var(--primary)" }}>
                     {h.service}
                   </p>
-                  <p style={{ margin: 0, fontSize: "13px", color: "#777" }}>
+                  <p style={{ margin: 0, fontSize: "13px", color: "var(--muted)" }}>
                     📅 {h.date}
                   </p>
                 </div>
@@ -118,19 +118,19 @@ const HistoryPage = () => {
                       fontSize: "20px",
                       fontWeight: "bold",
                       margin: "0 0 5px",
-                      color: "#28a745",
+                      color: "var(--success)",
                     }}
                   >
                     ₹{h.rate}
                   </p>
                   <span
                     style={{
-                      background: "#e7f5e4",
+                      background: "var(--success-bg)",
                       padding: "5px 12px",
                       borderRadius: "6px",
                       fontSize: "12px",
                       fontWeight: "600",
-                      color: "#2d7a33",
+                      color: "var(--success)",
                     }}
                   >
                     {h.status || "Completed"}

@@ -21,6 +21,7 @@ import useDebounce from "./hooks/useDebounce.js";
  */
 
 const ProfessionalFinder = () => {
+  const avatarFallback = "/avatar.svg";
   // ---------- RAW DATA ----------
   const [allProfessionals, setAllProfessionals] = useState([]);
 
@@ -251,7 +252,6 @@ const ProfessionalFinder = () => {
 
   const activeFiltersCount = useMemo(() => {
     let count = 0;
-    if (professionFilter) count++;
     if (cityFilter) count++;
     if ((parseInt(minPrice) || 0) > 0) count++;
     if (maxPrice) count++;
@@ -292,7 +292,7 @@ const ProfessionalFinder = () => {
         style={{
           fontSize: "32px",
           fontWeight: "800",
-          color: "#222",
+          color: "var(--text)",
           marginBottom: "18px",
           textAlign: "center",
         }}
@@ -303,7 +303,7 @@ const ProfessionalFinder = () => {
         style={{
           textAlign: "center",
           marginBottom: "20px",
-          color: "#555",
+          color: "var(--muted)",
         }}
       >
         Search by skill, city, rating, and price. Filter verified experts and
@@ -332,7 +332,7 @@ const ProfessionalFinder = () => {
             onChange={(e) => setSearchText(e.target.value)}
           />
           {searchText && (
-            <button
+              <button
               onClick={() => setSearchText("")}
               style={{
                 position: "absolute",
@@ -343,7 +343,7 @@ const ProfessionalFinder = () => {
                 background: "transparent",
                 fontSize: "18px",
                 cursor: "pointer",
-                color: "#888",
+                color: "var(--muted)",
               }}
             >
               ×
@@ -358,10 +358,10 @@ const ProfessionalFinder = () => {
           type="button"
           className="filter-open-btn"
           onClick={() => setFilterOpen(true)}
-          style={{ background: "#fff", border: "1px solid #e6e9ee", padding: "10px 14px", borderRadius: 8, fontWeight: 700 }}
+          style={{ background: "var(--surface)", border: "1px solid rgba(0,0,0,0.06)", padding: "10px 14px", borderRadius: 8, fontWeight: 700 }}
         >
           Filter{activeFiltersCount > 0 && (
-            <span style={{ marginLeft: 8, background: '#007bff', color: '#fff', padding: '0 8px', borderRadius: 16, fontSize: 12 }}>
+              <span style={{ marginLeft: 8, background: 'var(--primary)', color: 'var(--surface)', padding: '0 8px', borderRadius: 16, fontSize: 12 }}>
               {activeFiltersCount}
             </span>
           )}
@@ -375,7 +375,7 @@ const ProfessionalFinder = () => {
         style={{
           fontSize: "22px",
           margin: "10px 0 20px",
-          color: "#333",
+          color: "var(--text)",
         }}
       >
         Showing {filteredProfessionals.length} of {allProfessionals.length - blockedIds.length}{" "}
@@ -431,9 +431,10 @@ const ProfessionalFinder = () => {
               >
                 {/* Image */}
                 <img
-                  src={p.image}
+                  src={p.image || avatarFallback}
                   alt={p.name}
                   className="card-image"
+                  onError={(e)=>{e.target.onerror=null; e.target.src = avatarFallback}}
                 />
 
                 {/* Text Content */}
@@ -468,7 +469,7 @@ const ProfessionalFinder = () => {
                       >
                         {p.profession}
                         {p.experience !== undefined && (
-                          <span style={{ marginLeft: 8, fontWeight: 500, color: '#6b7280', fontSize: '13px' }}>{p.experience} yrs</span>
+                          <span style={{ marginLeft: 8, fontWeight: 500, color: 'var(--muted)', fontSize: '13px' }}>{p.experience} yrs</span>
                         )}
                       </p>
                     </div>
@@ -484,23 +485,23 @@ const ProfessionalFinder = () => {
 
                   {/* Skills */}
                   {p.skills && (
-                    <div
-                      style={{
-                        display: "flex",
-                        flexWrap: "wrap",
-                        gap: "6px",
-                        marginBottom: "8px",
-                      }}
+                        <div
+                          style={{
+                            display: "flex",
+                            flexWrap: "wrap",
+                            gap: "6px",
+                            marginBottom: "8px",
+                          }}
                     >
                       {p.skills.slice(0, 4).map((s) => (
                         <span
                           key={s}
-                          style={{
-                            fontSize: "12px",
-                            background: "#f1f3f5",
+                              style={{
+                                fontSize: "12px",
+                                background: "var(--tag-bg)",
                             padding: "4px 8px",
                             borderRadius: "12px",
-                            color: "#555",
+                            color: "var(--muted)",
                           }}
                         >
                           {s}
@@ -510,10 +511,10 @@ const ProfessionalFinder = () => {
                   )}
 
                   {/* Description */}
-                  <p
+                      <p
                     style={{
                       fontSize: "14px",
-                      color: "#555",
+                      color: "var(--muted)",
                       marginBottom: "10px",
                     }}
                   >
@@ -528,7 +529,7 @@ const ProfessionalFinder = () => {
                         style={{
                           fontSize: "14px",
                           marginLeft: "4px",
-                          color: "#333",
+                          color: "var(--muted)",
                         }}
                       >
                         ({p.rating.toFixed(1)})
@@ -588,9 +589,9 @@ const ProfessionalFinder = () => {
             </p>
 
             <div className="modal-actions">
-              <button
+                <button
                 onClick={closeBooking}
-                style={{ backgroundColor: "#e9ecef" }}
+                style={{ backgroundColor: "var(--surface)", border: '1px solid rgba(0,0,0,0.06)' }}
               >
                 Cancel
               </button>

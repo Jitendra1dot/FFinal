@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/react.svg"; // Replace later with real UnifyHub logo
+import ThemePicker from "./ThemePicker.jsx";
 
 const Header = () => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -20,23 +21,10 @@ const Header = () => {
     window.location.reload();
   };
 
-  return (
-    <header
-      className="app-header"
-      style={{
-        background: "linear-gradient(90deg, #4b6cb7, #182848)",
-        padding: "12px 35px",
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        position: "sticky",
-        top: 0,
-        zIndex: 1000,
-        color: "white",
-      }}
-    >
+    return (
+    <header className="app-header">
       {/* Brand + Logo */}
-      <Link
+        <Link
         to="/"
         className="app-title"
         style={{
@@ -44,7 +32,7 @@ const Header = () => {
           alignItems: "center",
           gap: "10px",
           textDecoration: "none",
-          color: "#fff",
+          color: "var(--text)",
           fontSize: "26px",
           fontWeight: "bold",
         }}
@@ -64,7 +52,7 @@ const Header = () => {
           style={{
             textDecoration: "none",
             fontWeight: "bold",
-            color: "#ffc107",
+            color: "var(--accent)",
           }}
         >
           Become a Pro
@@ -93,7 +81,7 @@ const Header = () => {
             <button
               onClick={handleSignOut}
               style={{
-                backgroundColor: "#ff3b57",
+                backgroundColor: "var(--danger)",
                 border: "none",
                 padding: "8px 14px",
                 borderRadius: "6px",
@@ -109,10 +97,10 @@ const Header = () => {
           <Link
             to="/signin"
             style={{
-              backgroundColor: "#00c6ff",
+              background: "linear-gradient(90deg, var(--accent), var(--primary))",
               padding: "8px 14px",
               borderRadius: "6px",
-              color: "#000",
+              color: "#fff",
               fontWeight: "bold",
               textDecoration: "none",
             }}
@@ -120,6 +108,7 @@ const Header = () => {
             Sign In / Register
           </Link>
         )}
+      <ThemePicker />
       </div>
     </header>
   );

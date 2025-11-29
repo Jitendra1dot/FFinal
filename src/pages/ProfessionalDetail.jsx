@@ -15,8 +15,8 @@ const ProfessionalDetail = () => {
 
     const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
 
-    const avatarFallback = "/avatar.png"; // ← add avatar.png inside public folder
-    const upiQR = "/upi-placeholder.png"; // ← add a UPI placeholder QR here
+    const avatarFallback = "/avatar.svg";
+    const upiQR = "/im1.png"; // reuse existing public image as UPI placeholder
 
     if (!professional) {
         return (
@@ -64,12 +64,12 @@ const ProfessionalDetail = () => {
             <button 
                 onClick={() => navigate(-1)} 
                 className="signin-btn" 
-                style={{ backgroundColor: "#555", marginBottom: "20px" }}>
+                style={{ backgroundColor: "var(--surface)", marginBottom: "20px", color: 'var(--text)' }}>
                 ← Back
             </button>
 
             <div style={{
-                background: "white",
+                background: "var(--surface)",
                 padding: "30px",
                 borderRadius: "14px",
                 boxShadow: "0 6px 20px rgba(0,0,0,0.08)"
@@ -86,13 +86,14 @@ const ProfessionalDetail = () => {
                                 height: "220px",
                                 borderRadius: "50%",
                                 objectFit: "cover",
-                                border: "4px solid #007bff"
+                                border: "4px solid var(--primary)"
                             }}
+                            onError={(e)=>{e.target.onerror=null; e.target.src = avatarFallback}}
                         />
 
                         <div style={{ marginTop: "10px" }}>
                             <StarRating rating={professional.rating} />
-                            <p style={{ marginTop: 5, color: "#666" }}>
+                            <p style={{ marginTop: 5, color: "var(--muted)" }}>
                                 ({professional.rating} / 5.0)
                             </p>
                         </div>
@@ -100,11 +101,11 @@ const ProfessionalDetail = () => {
                         {professional.isVerified && (
                             <div style={{
                                 marginTop: "8px",
-                                backgroundColor: "#e8f8ec",
+                                backgroundColor: "var(--success-bg)",
                                 padding: "5px 10px",
                                 borderRadius: "6px",
                                 display: "inline-block",
-                                color: "#148a22",
+                                color: "var(--success)",
                                 fontSize: "14px",
                                 fontWeight: "bold"
                             }}>
@@ -117,7 +118,7 @@ const ProfessionalDetail = () => {
                     <div style={{ flexGrow: 1 }}>
                         <h1 style={{
                             fontSize: "32px",
-                            color: "#222",
+                            color: "var(--text)",
                             marginBottom: "5px"
                         }}>
                             {professional.name}
@@ -126,7 +127,7 @@ const ProfessionalDetail = () => {
                         <p style={{
                             fontSize: "19px",
                             fontWeight: "bold",
-                            color: "#007bff",
+                            color: "var(--primary)",
                             margin: "5px 0 15px"
                         }}>
                             {professional.profession}
@@ -140,11 +141,11 @@ const ProfessionalDetail = () => {
                         }}>
                             {professional.skills.map((s, i) => (
                                 <span key={i} style={{
-                                    background: "#eef5ff",
+                                    background: "var(--tag-bg)",
                                     padding: "5px 10px",
                                     borderRadius: "6px",
                                     fontSize: "13px",
-                                    color: "#0056c7",
+                                    color: "var(--primary-600)",
                                     fontWeight: 600
                                 }}>
                                     {s}
@@ -152,12 +153,12 @@ const ProfessionalDetail = () => {
                             ))}
                         </div>
 
-                        <p style={{ color: "#444", lineHeight: "1.6", marginBottom: "25px" }}>
+                        <p style={{ color: "var(--muted)", lineHeight: "1.6", marginBottom: "25px" }}>
                             {professional.desc}
                         </p>
 
                         <div style={{
-                            border: "1px solid #007bff",
+                            border: "1px solid var(--primary)",
                             padding: "15px",
                             borderRadius: "12px",
                             display: "flex",
@@ -166,7 +167,7 @@ const ProfessionalDetail = () => {
                             flexWrap: "wrap"
                         }}>
                             <span style={{ fontSize: "18px", fontWeight: "bold" }}>
-                                Price: <span style={{ color: "#d6002a" }}>₹{professional.rate}/hr</span>
+                                Price: <span style={{ color: "var(--danger)" }}>₹{professional.rate}/hr</span>
                             </span>
 
                             <button 
@@ -201,20 +202,20 @@ const ProfessionalDetail = () => {
                                 style={{
                                     width: "200px",
                                     height: "200px",
-                                    border: "2px solid #ccc",
+                                    border: "2px solid rgba(255,255,255,0.08)",
                                     borderRadius: "10px"
                                 }}
                             />
-                            <p style={{ fontSize: "13px", color: "red", marginTop: "8px" }}>
+                            <p style={{ fontSize: "13px", color: "var(--danger)", marginTop: "8px" }}>
                                 *Simulated Test Payment Only*
                             </p>
                         </div>
 
                         <div className="modal-actions">
-                            <button onClick={() => setIsModalOpen(false)} style={{ backgroundColor: "#aaa" }}>
+                                <button onClick={() => setIsModalOpen(false)} style={{ backgroundColor: "#aaa" }}>
                                 Cancel
                             </button>
-                            <button onClick={handleConfirmBooking} style={{ backgroundColor: "#28a745" }}>
+                            <button onClick={handleConfirmBooking} style={{ backgroundColor: "var(--success)" }}>
                                 Confirm Payment
                             </button>
                         </div>

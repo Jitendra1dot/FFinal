@@ -154,7 +154,7 @@ const SignIn = () => {
         <p style={{ textAlign: "center", marginTop: "18px" }}>
           {isRegistering ? "Already have an account?" : "New here?"}{" "}
           <span onClick={() => setIsRegistering(!isRegistering)}
-            style={{ color: "#007bff", cursor: "pointer", fontWeight: "700" }}>
+            style={{ color: "var(--primary)", cursor: "pointer", fontWeight: "700" }}>
             {isRegistering ? "Sign in instead" : "Create an account"}
           </span>
         </p>

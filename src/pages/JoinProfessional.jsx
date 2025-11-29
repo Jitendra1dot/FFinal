@@ -112,10 +112,10 @@ const JoinProfessional = () => {
   return (
     <div className="signin-page-container" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
       <div
-        style={{
-          width: "100%",
-          maxWidth: "450px",
-          background: "#ffffff",
+          style={{
+            width: "100%",
+            maxWidth: "450px",
+            background: "var(--surface)",
           padding: "35px",
           borderRadius: "12px",
           boxShadow: "0 6px 18px rgba(0,0,0,0.12)",
@@ -126,12 +126,12 @@ const JoinProfessional = () => {
             textAlign: "center",
             fontSize: "28px",
             marginBottom: "10px",
-            color: "#333",
+            color: "var(--text)",
           }}
         >
           🚀 Register as a Professional
         </h2>
-        <p style={{ textAlign: "center", color: "#666", marginBottom: "25px" }}>
+        <p style={{ textAlign: "center", color: "var(--muted)", marginBottom: "25px" }}>
           Get hired by thousands of users! 👥✨
         </p>
 
@@ -256,7 +256,7 @@ const JoinProfessional = () => {
               fontSize: "18px",
               fontWeight: "bold",
               cursor: loading ? "not-allowed" : "pointer",
-              background: loading ? "#aaa" : "#007bff",
+              background: loading ? "#aaa" : "var(--primary)",
             }}
             disabled={loading}
           >

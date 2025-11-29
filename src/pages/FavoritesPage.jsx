@@ -5,6 +5,7 @@ import { getAllProfessionals } from "../data.js";
 import StarRating from "../components/StarRating.jsx";
 
 const FavoritesPage = () => {
+  const avatarFallback = "/avatar.svg";
   const navigate = useNavigate();
   const [favoriteIds, setFavoriteIds] = useState([]);
   const [professionals] = useState(getAllProfessionals());
@@ -38,7 +39,7 @@ const FavoritesPage = () => {
   if (!currentUser) {
     return (
       <div className="main-content" style={{ textAlign: "center", padding: "60px" }}>
-        <h2 style={{ color: "#c0392b" }}>Access Restricted</h2>
+        <h2 style={{ color: "var(--danger)" }}>Access Restricted</h2>
         <p>You must be logged in to view favorites.</p>
         <button
           onClick={() => navigate("/signin")}
@@ -66,7 +67,7 @@ const FavoritesPage = () => {
 
       {favoriteProfessionals.length === 0 ? (
         <div style={{ textAlign: "center", marginTop: "70px" }}>
-          <p style={{ fontSize: "18px", color: "#666" }}>
+          <p style={{ fontSize: "18px", color: "var(--muted)" }}>
             Your favorite list is empty 🚫
           </p>
           <button
@@ -95,7 +96,7 @@ const FavoritesPage = () => {
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  background: "#fff",
+                  background: "var(--surface)",
                   border: "1px solid #ddd",
                   borderRadius: "50%",
                   cursor: "pointer",
@@ -105,27 +106,33 @@ const FavoritesPage = () => {
                 ❌
               </button>
 
-              <Link
-                to={`/professional/${p.id}`}
-                style={{ color: "inherit", textDecoration: "none" }}
-              >
-                <div className="card-content">
-                  <h3 style={{ margin: "5px 0" }}>{p.name}</h3>
-                  <p style={{ color: "#007bff", fontWeight: "600", fontSize: "14px" }}>
-                    {p.profession}
-                  </p>
+              <Link to={`/professional/${p.id}`} style={{ color: "inherit", textDecoration: "none" }}>
+                <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+                  <img
+                    src={p.image || avatarFallback}
+                    alt={p.name}
+                    style={{ width: 86, height: 86, borderRadius: 12, objectFit: 'cover', flexShrink: 0 }}
+                    onError={(e)=>{e.target.onerror=null; e.target.src = avatarFallback}}
+                  />
 
-                  <StarRating rating={p.rating} />
+                  <div className="card-content">
+                    <h3 style={{ margin: "5px 0" }}>{p.name}</h3>
+                    <p style={{ color: "var(--primary)", fontWeight: "600", fontSize: "14px" }}>
+                      {p.profession}
+                    </p>
 
-                  <p style={{ margin: "10px 0", color: "#666" }}>
-                    {p.desc.substring(0, 70)}...
-                  </p>
+                    <StarRating rating={p.rating} />
 
-                  <p style={{ fontWeight: "bold" }}>₹{p.rate}/hr</p>
+                    <p style={{ margin: "10px 0", color: "var(--muted)" }}>
+                      {p.desc.substring(0, 70)}...
+                    </p>
 
-                  <button className="hire-btn" style={{ marginTop: "10px" }}>
-                    View Profile
-                  </button>
+                    <p style={{ fontWeight: "bold" }}>₹{p.rate}/hr</p>
+
+                    <button className="hire-btn" style={{ marginTop: "10px" }}>
+                      View Profile
+                    </button>
+                  </div>
                 </div>
               </Link>
             </div>
