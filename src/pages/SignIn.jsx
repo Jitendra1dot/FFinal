@@ -104,7 +104,7 @@ const SignIn = () => {
         <h2 style={{ textAlign: "left", fontWeight: "700", marginBottom: "6px" }}>
           {isRegistering ? "Create your account" : "Welcome back!"}
         </h2>
-        <p style={{ textAlign: "left", color: "#6b7280", marginBottom: "14px" }}>
+        <p style={{ textAlign: "left", color: "var(--muted)", marginBottom: "14px" }}>
           {isRegistering ? "Create a new account to get started" : "Sign in to continue"}
         </p>
 
@@ -135,7 +135,7 @@ const SignIn = () => {
           <div className="remember-forgot">
             <label style={{display:'flex', alignItems:'center', gap:'8px'}}>
               <input type="checkbox" checked={rememberMe} onChange={(e) => setRememberMe(e.target.checked)} />
-              <span style={{fontSize:'13px', color:'#374151'}}>Remember me</span>
+              <span style={{fontSize:'13px', color:'var(--muted)'}}>Remember me</span>
             </label>
             <a className="forgot-link" onClick={() => alert('Password reset placeholder')}>Forgot?</a>
           </div>

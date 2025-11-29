@@ -102,7 +102,7 @@ const JoinProfessional = () => {
   const inputBase = {
     padding: "12px",
     borderRadius: "6px",
-    border: "1.5px solid #ccc",
+    border: "1.5px solid var(--border)",
     width: "100%",
     marginBottom: "6px",
     outline: "none",
@@ -110,17 +110,8 @@ const JoinProfessional = () => {
   };
 
   return (
-    <div className="signin-page-container" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-      <div
-          style={{
-            width: "100%",
-            maxWidth: "450px",
-            background: "var(--surface)",
-          padding: "35px",
-          borderRadius: "12px",
-          boxShadow: "0 6px 18px rgba(0,0,0,0.12)",
-        }}
-      >
+    <div className="join-pro-page signin-page-container">
+      <div className="join-pro-card full-bleed">
         <h2
           style={{
             textAlign: "center",
@@ -144,11 +135,11 @@ const JoinProfessional = () => {
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             style={{
               ...inputBase,
-              borderColor: errors.name ? "red" : "#ccc",
+              borderColor: errors.name ? "var(--danger)" : "var(--border)",
             }}
           />
           {errors.name && (
-            <small style={{ color: "red" }}>{errors.name}</small>
+            <small style={{ color: "var(--danger)" }}>{errors.name}</small>
           )}
 
           {/* Email */}
@@ -162,11 +153,11 @@ const JoinProfessional = () => {
             }
             style={{
               ...inputBase,
-              borderColor: errors.email ? "red" : "#ccc",
+              borderColor: errors.email ? "var(--danger)" : "var(--border)",
             }}
           />
           {errors.email && (
-            <small style={{ color: "red" }}>{errors.email}</small>
+            <small style={{ color: "var(--danger)" }}>{errors.email}</small>
           )}
 
           {/* Profession */}
@@ -178,7 +169,7 @@ const JoinProfessional = () => {
             }
             style={{
               ...inputBase,
-              borderColor: errors.profession ? "red" : "#ccc",
+              borderColor: errors.profession ? "var(--danger)" : "var(--border)",
             }}
           >
             <option value="">Select Profession</option>
@@ -187,7 +178,7 @@ const JoinProfessional = () => {
             ))}
           </select>
           {errors.profession && (
-            <small style={{ color: "red" }}>{errors.profession}</small>
+            <small style={{ color: "var(--danger)" }}>{errors.profession}</small>
           )}
 
           {/* Rate */}
@@ -201,11 +192,11 @@ const JoinProfessional = () => {
             }
             style={{
               ...inputBase,
-              borderColor: errors.rate ? "red" : "#ccc",
+              borderColor: errors.rate ? "var(--danger)" : "var(--border)",
             }}
           />
           {errors.rate && (
-            <small style={{ color: "red" }}>{errors.rate}</small>
+            <small style={{ color: "var(--danger)" }}>{errors.rate}</small>
           )}
 
           {/* Experience */}
@@ -219,11 +210,11 @@ const JoinProfessional = () => {
             }
             style={{
               ...inputBase,
-              borderColor: errors.experience ? "red" : "#ccc",
+              borderColor: errors.experience ? "var(--danger)" : "var(--border)",
             }}
           />
           {errors.experience && (
-            <small style={{ color: "red" }}>{errors.experience}</small>
+            <small style={{ color: "var(--danger)" }}>{errors.experience}</small>
           )}
 
           {/* Description */}
@@ -237,12 +228,12 @@ const JoinProfessional = () => {
             }
             style={{
               ...inputBase,
-              borderColor: errors.desc ? "red" : "#ccc",
+              borderColor: errors.desc ? "var(--danger)" : "var(--border)",
               resize: "none",
             }}
           />
           {errors.desc && (
-            <small style={{ color: "red" }}>{errors.desc}</small>
+            <small style={{ color: "var(--danger)" }}>{errors.desc}</small>
           )}
 
           {/* Submit */}
@@ -256,7 +247,7 @@ const JoinProfessional = () => {
               fontSize: "18px",
               fontWeight: "bold",
               cursor: loading ? "not-allowed" : "pointer",
-              background: loading ? "#aaa" : "var(--primary)",
+              background: loading ? "var(--pill-bg)" : "var(--primary)",
             }}
             disabled={loading}
           >

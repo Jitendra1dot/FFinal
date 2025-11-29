@@ -21,7 +21,7 @@ const ProfessionalDetail = () => {
     if (!professional) {
         return (
             <div className="main-content" style={{ textAlign: "center", padding: "50px" }}>
-                <h2 style={{ color: "red" }}>Professional Not Found</h2>
+                <h2 style={{ color: "var(--danger)" }}>Professional Not Found</h2>
                 <p>The requested profile does not exist.</p>
                 <button onClick={() => navigate('/')} className="signin-btn" style={{ marginTop: '20px' }}>
                     Back Home
@@ -212,7 +212,7 @@ const ProfessionalDetail = () => {
                         </div>
 
                         <div className="modal-actions">
-                                <button onClick={() => setIsModalOpen(false)} style={{ backgroundColor: "#aaa" }}>
+                                <button onClick={() => setIsModalOpen(false)} style={{ backgroundColor: "var(--pill-bg)" }}>
                                 Cancel
                             </button>
                             <button onClick={handleConfirmBooking} style={{ backgroundColor: "var(--success)" }}>

@@ -49,11 +49,8 @@ const Header = () => {
       <div style={{ display: "flex", gap: "18px", alignItems: "center" }}>
         <Link
           to="/join"
-          style={{
-            textDecoration: "none",
-            fontWeight: "bold",
-            color: "var(--accent)",
-          }}
+          className="become-pro-btn"
+          style={{ textDecoration: "none", fontWeight: "700" }}
         >
           Become a Pro
         </Link>
@@ -62,19 +59,19 @@ const Header = () => {
           <>
             <Link
               to="/history"
-              style={{ textDecoration: "none", fontWeight: "bold", color: "#fff" }}
+              style={{ textDecoration: "none", fontWeight: "bold", color: "var(--text)" }}
             >
               🕒 History
             </Link>
 
             <Link
               to="/favorites"
-              style={{ textDecoration: "none", fontWeight: "bold", color: "#fff" }}
+              style={{ textDecoration: "none", fontWeight: "bold", color: "var(--text)" }}
             >
               ❤️ Favorites
             </Link>
 
-            <span style={{ fontWeight: "bold", color: "#fff" }}>
+            <span style={{ fontWeight: "bold", color: "var(--text)" }}>
               👋 {currentUser.name.split(" ")[0]}
             </span>
 
@@ -85,7 +82,7 @@ const Header = () => {
                 border: "none",
                 padding: "8px 14px",
                 borderRadius: "6px",
-                color: "white",
+                color: "var(--btn-on-danger)",
                 fontWeight: "bold",
                 cursor: "pointer",
               }}
@@ -100,7 +97,7 @@ const Header = () => {
               background: "linear-gradient(90deg, var(--accent), var(--primary))",
               padding: "8px 14px",
               borderRadius: "6px",
-              color: "#fff",
+              color: "var(--btn-on-primary)",
               fontWeight: "bold",
               textDecoration: "none",
             }}

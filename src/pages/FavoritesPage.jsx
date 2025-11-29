@@ -97,7 +97,7 @@ const FavoritesPage = () => {
                   justifyContent: "center",
                   alignItems: "center",
                   background: "var(--surface)",
-                  border: "1px solid #ddd",
+                  border: "1px solid var(--border)",
                   borderRadius: "50%",
                   cursor: "pointer",
                   transition: "0.2s",

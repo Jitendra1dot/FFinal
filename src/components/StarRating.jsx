@@ -11,14 +11,14 @@ const StarRating = ({ rating }) => {
     <div style={{ display: "flex", gap: "2px", fontSize: "20px" }}>
       {/* Full Stars */}
       {[...Array(fullStars)].map((_, i) => (
-        <span key={`full-${i}`} style={{ color: "#FFD700" }} title={`${rating} out of 5`}>
+        <span key={`full-${i}`} style={{ color: "var(--star)" }} title={`${rating} out of 5`}>
           ★
         </span>
       ))}
 
       {/* Half Star */}
       {halfStar && (
-        <span key="half" style={{ color: "#FFD700", position: "relative" }} title={`${rating} out of 5`}>
+        <span key="half" style={{ color: "var(--star)", position: "relative" }} title={`${rating} out of 5`}>
           <span
             style={{
               width: "50%",
@@ -26,18 +26,18 @@ const StarRating = ({ rating }) => {
               display: "inline-block",
               position: "absolute",
               left: "0",
-              color: "#FFD700",
+              color: "var(--star)",
             }}
           >
             ★
           </span>
-          <span style={{ color: "#ddd" }}>★</span>
+          <span style={{ color: "var(--star-muted)" }}>★</span>
         </span>
       )}
 
       {/* Empty Stars */}
       {[...Array(emptyStars)].map((_, i) => (
-        <span key={`empty-${i}`} style={{ color: "#ddd" }} title={`${rating} out of 5`}>
+        <span key={`empty-${i}`} style={{ color: "var(--star-muted)" }} title={`${rating} out of 5`}>
           ★
         </span>
       ))}

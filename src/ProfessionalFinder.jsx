@@ -389,7 +389,7 @@ const ProfessionalFinder = () => {
             style={{
               gridColumn: "1 / -1",
               textAlign: "center",
-              color: "#777",
+              color: "var(--muted)",
               fontSize: "18px",
               marginTop: "40px",
             }}
@@ -583,7 +583,7 @@ const ProfessionalFinder = () => {
               <p>💰 ₹{selectedPro.rate} per hour</p>
             </div>
 
-            <p style={{ fontSize: "14px", color: "#555" }}>
+            <p style={{ fontSize: "14px", color: "var(--muted)" }}>
               This is a <strong>frontend demo</strong>. In the full project,
               this action would contact the backend and notify the professional.
             </p>
@@ -597,7 +597,7 @@ const ProfessionalFinder = () => {
               </button>
               <button
                 onClick={confirmBooking}
-                style={{ backgroundColor: "#28a745", color: "#fff" }}
+                style={{ backgroundColor: "var(--success)", color: "var(--btn-on-success)" }}
               >
                 Confirm Booking
               </button>

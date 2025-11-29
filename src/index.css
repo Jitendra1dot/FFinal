@@ -23,6 +23,15 @@
   --tag-bg: #f1f3f5;
   --success-bg: rgba(11,132,87,0.08);
   --danger-bg: rgba(179,38,30,0.08);
+  --btn-on-success: #fff; /* text on success-colored buttons */
+  --btn-on-primary: #fff; /* text on primary buttons */
+  --star: #FFD700; /* default star color */
+  --star-muted: #ddd; /* empty star color */
+  --border: #e5e7eb; /* default border color */
+  --header-text: #fff; /* text for header title / nav */
+  --btn-on-danger: #fff;
+  --card-panel-bg: rgba(255,255,255,0.94);
+  --card-panel-border: rgba(16,24,40,0.04);
 }
 
 /* -- THEME VARIANTS --------------------------------------------------------- */
@@ -62,6 +71,15 @@
   --card-bg: #0f1b2a;
   --text: #e6eef6;
   --muted: #9aa7b4;
+  --btn-on-success: #fff;
+  --btn-on-primary: #fff;
+  --star: #ffd36f;
+  --star-muted: rgba(255,255,255,0.25);
+  --border: rgba(255,255,255,0.08);
+  --header-text: #fff;
+  --btn-on-danger: #fff;
+  --card-panel-bg: rgba(6,11,18,0.70);
+  --card-panel-border: rgba(255,255,255,0.06);
 }
 
 .theme-bright {
@@ -71,12 +89,90 @@
   --accent: #ff2b8a;  /* neon pink */
   --surface: rgba(10, 12, 22, 0.95); /* dark surface for cards */
   --card-bg: rgba(12, 16, 32, 0.9);
-  --text: #e6ecff; /* light text on dark background */
-  --muted: #9aa7b4;
+  --text: #ffffff; /* white text on bright neon background */
+  --muted: rgba(255,255,255,0.78);
   --tag-bg: linear-gradient(90deg, rgba(48, 99, 255, 0.08), rgba(127, 54, 233, 0.08));
   --pill-bg: rgba(75, 40, 120, 0.06);
   --success: #36d399;
   --danger: #ff6b6b;
+  --card-panel-bg: rgba(255,255,255,0.03);
+  --card-panel-border: rgba(255,255,255,0.06);
+}
+
+/* Full background layout for the Join Professional page */
+.join-pro-page {
+  min-height: 100vh;
+  padding: 60px 20px; /* spacing around the centered card */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-gradient);
+  background-size: cover;
+}
+
+/* Force the join page to render full-bleed inside the 'page-wrapper' and remove inner white frame */
+.page-wrapper > .join-pro-page {
+  width: 100vw;
+  max-width: none;
+  margin: 0; /* so it spans full width inside wrapper */
+  padding: 0; /* we handle padding in join-pro-card */
+  background: var(--bg-gradient) !important;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+/* Center the form card without page padding */
+.page-wrapper > .join-pro-page .join-pro-card {
+  margin: 88px auto; /* center vertically with top/bottom spacing */
+}
+
+.join-pro-card {
+  width: 100%;
+  max-width: 520px;
+  background: transparent; /* show full page gradient */
+  padding: 36px;
+  border-radius: 12px;
+  box-shadow: none;
+  border: none;
+  color: var(--text);
+}
+.join-pro-card .input-box, .join-pro-card input, .join-pro-card textarea, .join-pro-card select {
+  background: var(--surface); /* ensure inputs remain readable */
+}
+
+/* Full-bleed variant: the card itself has a gradient/color background */
+.join-pro-card.full-bleed {
+  background: linear-gradient(90deg, var(--accent), var(--primary));
+  color: var(--btn-on-primary);
+  box-shadow: 0 12px 40px rgba(2,6,23,0.12);
+}
+.join-pro-card.full-bleed .input-box, .join-pro-card.full-bleed input, .join-pro-card.full-bleed textarea, .join-pro-card.full-bleed select {
+  background: rgba(255,255,255,0.07);
+  color: var(--btn-on-primary);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.theme-bright .join-pro-card.full-bleed .input-box, .theme-bright .join-pro-card.full-bleed input, .theme-bright .join-pro-card.full-bleed textarea, .theme-bright .join-pro-card.full-bleed select {
+  background: rgba(255,255,255,0.04);
+  color: var(--text);
+}
+
+/* Slightly more contrast on brighter themes so the form remains readable */
+.theme-bright .join-pro-card { border: 1px solid rgba(255,255,255,0.06); }
+
+@keyframes neonShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Apply an animated gradient to body when bright theme is active */
+html.theme-bright body {
+  background: var(--bg-gradient);
+  background-size: 300% 300%;
+  animation: neonShift 12s ease infinite;
 }
 
 
@@ -98,7 +194,7 @@ html, body, #root {
   align-items: center;
   padding: 14px 60px;
   background: linear-gradient(90deg, var(--primary), rgba(10, 30, 70, 0.9));
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -108,7 +204,7 @@ html, body, #root {
   font-size: 26px;
   font-weight: bold;
   text-decoration: none;
-  color: #fff;
+  color: var(--header-text);
 }
 
 /* Sign In button */
@@ -117,13 +213,43 @@ html, body, #root {
   border: none;
   border-radius: 6px;
   padding: 8px 14px;
-  color: #fff;
+  color: var(--btn-on-primary);
   cursor: pointer;
   transition: 0.2s;
 }
 
 .signin-btn:hover {
   background-color: var(--primary-600);
+}
+
+/* Become a Pro - full colored button in header */
+.become-pro-btn {
+  background: linear-gradient(90deg, var(--accent), var(--primary));
+  padding: 10px 16px;
+  border-radius: 8px;
+  color: var(--btn-on-primary);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+  font-size: 15px;
+  border: none;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.08);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.become-pro-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(2,6,23,0.12); }
+
+.theme-bright .become-pro-btn { box-shadow: 0 6px 22px rgba(124,58,237,0.15), 0 3px 8px rgba(255,43,138,0.08); }
+.theme-bright .become-pro-btn:hover { box-shadow: 0 12px 36px rgba(124,58,237,0.22), 0 6px 18px rgba(255,43,138,0.12); }
+
+.become-pro-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(11,102,166,0.12), 0 6px 18px rgba(2,6,23,0.08);
+}
+
+@media (max-width: 640px) {
+  .become-pro-btn { padding: 8px 12px; font-size: 14px; }
 }
 
 /* ===== MAIN PAGE CONTAINER (CENTERED) ===== */
@@ -143,7 +269,7 @@ html, body, #root {
   text-align: center;
   font-weight: bold;
   margin-bottom: 15px;
-  color: #1a1a1a;
+  color: var(--text);
 }
 
 /* ===== CATEGORY BUTTONS ===== */
@@ -172,7 +298,7 @@ html, body, #root {
 .category-btn:hover,
 .category-btn.active {
   background-color: var(--primary);
-  color: #fff;
+  color: var(--btn-on-primary);
 }
 
 /* ===== FILTER BAR ===== */
@@ -229,7 +355,7 @@ html, body, #root {
   background-color: var(--primary);
   border: none;
   font-weight: 600;
-  color: #fff;
+  color: var(--btn-on-primary);
   cursor: pointer;
   transition: 0.25s;
 }
@@ -252,7 +378,7 @@ html, body, #root {
 }
 
 .modal-content {
-  background: white;
+  background: var(--surface);
   width: 420px;
   padding: 25px;
   border-radius: 12px;

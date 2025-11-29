@@ -22,7 +22,7 @@ const FilterModal = ({
         <header style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div>
             <h3 style={{ margin: 0 }}>Refine search</h3>
-            <div style={{ color: "#6b7280", fontSize: 13 }}>Fine tune results by applying these filters</div>
+            <div style={{ color: "var(--muted)", fontSize: 13 }}>Fine tune results by applying these filters</div>
           </div>
           <button className="close-btn" onClick={onClose} aria-label="Close filters">✕</button>
         </header>
