@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://Jitendra1dot.github.io/Finalproject/",
+  "homepage": "https://Jitendra1dot.github.io/FFinal/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
