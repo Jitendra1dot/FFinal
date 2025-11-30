@@ -5,6 +5,14 @@
     <link rel="icon" type="image/svg+xml" href="/FFinal/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>unifyhub</title>
+    <script>
+  const path = sessionStorage.getItem("path");
+  if (path) {
+    sessionStorage.removeItem("path");
+    history.replaceState(null, "", path);
+  }
+</script>
+
     <script type="module" crossorigin src="/FFinal/assets/index-DiWNVuBG.js"></script>
     <link rel="stylesheet" crossorigin href="/FFinal/assets/index-DIX5DTcA.css">
   </head>
