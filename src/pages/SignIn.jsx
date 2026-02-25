@@ -96,7 +96,7 @@ const SignIn = () => {
         <div className="signin-brand">
           <div className="signin-logo">U</div>
           <div>
-            <div className="signin-title">UnifyHub</div>
+            <div className="signin-title">ProConnect</div>
             <div className="signin-subtitle">Find & hire trusted professionals</div>
           </div>
         </div>

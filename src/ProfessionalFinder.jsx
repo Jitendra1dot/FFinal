@@ -1,7 +1,7 @@
 // src/ProfessionalFinder.jsx
 
 import React, { useState, useEffect, useMemo } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { getAllProfessionals } from "./data.js";
 import PopularCategories from "./components/PopularCategories.jsx";
@@ -12,7 +12,7 @@ import useDebounce from "./hooks/useDebounce.js";
 /**
  * ProfessionalFinder
  * -------------------------------------------------------
- * Main search + filter page for UnifyHub.
+ * Main search + filter page for ProConnect.
  * - Loads professionals (from static data for now)
  * - Provides search, city filter, profession filter
  * - Filters by rating and price range
@@ -27,6 +27,15 @@ const ProfessionalFinder = () => {
 
   // ---------- FILTER STATES ----------
   const [searchText, setSearchText] = useState("");
+  const location = useLocation();
+
+  // if URL has query param from header search, sync it
+  useEffect(() => {
+    const q = new URLSearchParams(location.search).get("q") || "";
+    if (q !== searchText) {
+      setSearchText(q);
+    }
+  }, [location.search]);
   const [professionFilter, setProfessionFilter] = useState("");
   const [cityFilter, setCityFilter] = useState("");
 
@@ -62,13 +71,12 @@ const ProfessionalFinder = () => {
     }
   }, []);
 
-  const favoritesKey = currentUser?.email
-    ? `favorites_${currentUser.email}`
-    : null;
+  // ---------- FAVORITES KEY ----------
+  const favoritesKey = currentUser && currentUser.email ? `favorites_${currentUser.email}` : null;
+  // ---------- BLOCKED KEY ----------
+  const blockedKey = currentUser && currentUser.email ? `blocked_${currentUser.email}` : null;
 
-  const blockedKey = currentUser?.email
-    ? `blocked_${currentUser.email}`
-    : null;
+  const navigate = useNavigate();
 
   const favoriteIds = useMemo(() => {
     if (!favoritesKey) return [];
@@ -101,7 +109,11 @@ const ProfessionalFinder = () => {
     // Listen for immediate add events from JoinProfessional to update UI
     const handler = (e) => {
       const newPro = e.detail;
-      setAllProfessionals((prev) => [newPro, ...prev]);
+      setAllProfessionals((prev) => {
+        // Prevent duplicate addition if already exists
+        if (prev.some(p => p.id === newPro.id)) return prev;
+        return [newPro, ...prev];
+      });
     };
     window.addEventListener("newProfessional", handler);
     return () => window.removeEventListener("newProfessional", handler);
@@ -278,10 +290,33 @@ const ProfessionalFinder = () => {
   const confirmBooking = () => {
     setBookingOpen(false);
     if (!selectedPro) return;
+
+    // Save booking in localStorage so it appears on the dashboard
+    if (currentUser && currentUser.email) {
+      const key = `bookingHistory_${currentUser.email}`;
+      const existing =
+        JSON.parse(localStorage.getItem(key) || "[]") || [];
+
+      const newBooking = {
+        proId: selectedPro.id,
+        proName: selectedPro.name,
+        service: selectedPro.profession,
+        rate: selectedPro.rate,
+        // use ISO string so the dashboard sorting works later if needed
+        date: new Date().toISOString(),
+        status: "pending",
+      };
+      existing.push(newBooking);
+      localStorage.setItem(key, JSON.stringify(existing));
+    }
+
     alert(
       `Booking request sent to ${selectedPro.name}! (Front-end demo only – no real backend yet)`
     );
     setSelectedPro(null);
+
+    // redirect user to dashboard to see their new booking
+    navigate("/dashboard");
   };
 
   // ---------- RENDER ----------
@@ -322,34 +357,7 @@ const ProfessionalFinder = () => {
 
       {/* FILTER CONTROLS */}
       <section className="controls-section" style={{ alignItems: 'center', gap: 12 }}>
-        {/* Search bar */}
-        <div style={{ position: "relative", flexBasis: "250px", flexGrow: 1 }}>
-          <input
-            className="search-input"
-            type="text"
-            placeholder="Search name, skill or service..."
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
-          />
-          {searchText && (
-              <button
-              onClick={() => setSearchText("")}
-              style={{
-                position: "absolute",
-                right: "10px",
-                top: "50%",
-                transform: "translateY(-50%)",
-                border: "none",
-                background: "transparent",
-                fontSize: "18px",
-                cursor: "pointer",
-                color: "var(--muted)",
-              }}
-            >
-              ×
-            </button>
-          )}
-        </div>
+        {/* search bar removed; header now handles search. above state still used for filtering and query param. */}
 
         {/* Hidden: City, profession, price, rating, verified - all accessible through Filter modal */}
 
@@ -360,7 +368,7 @@ const ProfessionalFinder = () => {
           onClick={() => setFilterOpen(true)}
           style={{ background: "var(--surface)", border: "1px solid rgba(0,0,0,0.06)", padding: "10px 14px", borderRadius: 8, fontWeight: 700 }}
         >
-          Filter{activeFiltersCount > 0 && (
+          Filter by{activeFiltersCount > 0 && (
               <span style={{ marginLeft: 8, background: 'var(--primary)', color: 'var(--surface)', padding: '0 8px', borderRadius: 16, fontSize: 12 }}>
               {activeFiltersCount}
             </span>
@@ -407,9 +415,12 @@ const ProfessionalFinder = () => {
           // but this check is a safeguard.
           if (isBlocked) return null;
 
+          // Ensure unique key by combining id and name (in case of duplicate ids)
+          const uniqueKey = `${p.id}_${p.name}`;
+
           return (
             <article
-              key={p.id}
+              key={uniqueKey}
               className="professional-card"
               style={{ position: "relative" }}
             >

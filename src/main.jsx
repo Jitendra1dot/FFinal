@@ -12,6 +12,7 @@ import JoinProfessional from "./pages/JoinProfessional.jsx";
 import ProfessionalDetail from "./pages/ProfessionalDetail.jsx";
 import FavoritesPage from "./pages/FavoritesPage.jsx";
 import HistoryPage from "./pages/HistoryPage.jsx";
+import Dashboard from "./pages/Dashboard.jsx";
 
 // Layout
 import Header from "./components/Header.jsx";
@@ -27,11 +28,11 @@ function PageLayout({ children, showHeader = true }) {
 }
 
 function AppRouter() {
-  // if you ever deploy under a sub-path, you can use basename here
-  // const basename = import.meta.env.BASE_URL || "/";
+  // if you ever deploy under a sub-path, use the Vite-provided base URL
+  const basename = import.meta.env.BASE_URL || "/";
   return (
-    // <BrowserRouter basename={basename}>
-    <BrowserRouter>
+    <BrowserRouter basename={basename}>
+
       <Routes>
         {/* Auth routes (no header) */}
         <Route
@@ -89,6 +90,16 @@ function AppRouter() {
             <RequireAuth>
               <PageLayout>
                 <HistoryPage />
+              </PageLayout>
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={
+            <RequireAuth>
+              <PageLayout>
+                <Dashboard />
               </PageLayout>
             </RequireAuth>
           }

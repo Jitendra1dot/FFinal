@@ -110,8 +110,17 @@ const JoinProfessional = () => {
   };
 
   return (
-    <div className="join-pro-page signin-page-container">
-      <div className="join-pro-card full-bleed">
+    <div className="signin-page-container" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+      <div
+          style={{
+            width: "100%",
+            maxWidth: "450px",
+            background: "var(--surface)",
+          padding: "35px",
+          borderRadius: "12px",
+          boxShadow: "0 6px 18px rgba(0,0,0,0.12)",
+        }}
+      >
         <h2
           style={{
             textAlign: "center",
